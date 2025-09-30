@@ -66,7 +66,7 @@ The main entities are:
 - **Watchlist** — tracks movies a user plans to watch
 
 
-![Database Scheme](kma_films_site/static/main/img/table_DB.jpg)
+![Database Scheme](kma_films_site/main/migrations/static/main/img/table_DB.jpg)
 
 
 ---

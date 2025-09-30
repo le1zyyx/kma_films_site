@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+*.egg-info/
+*.log
+
+# Virtual envs
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# MacOS
+.DS_Store
+
+# PyCharm
+.idea/

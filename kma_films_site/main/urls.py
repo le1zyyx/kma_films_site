@@ -1,10 +1,10 @@
 from django.urls import path
 from . import views
 
-from django.conf import settings
-from django.conf.urls.static import static
-
 urlpatterns = [
-    path('movies/', views.movies_list, name="movies_list"),
-    path('movies/create/', views.movie_create, name="movie_create"),
-]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('', views.home, name='home'),
+    path('movies/', views.MovieListView.as_view(), name='movies'),
+    path('movies/<int:pk>/', views.MovieDetailView.as_view(), name='movie_detail'),
+    path('votes/', views.VoteListView.as_view(), name='votes'),
+    path('favorites/', views.FavoriteListView.as_view(), name='favorites'),
+]

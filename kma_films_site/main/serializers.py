@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Movie, Vote, Favorite, Watchlist
+from .models import Movie, Vote, Favorite
 
 class MovieSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
@@ -15,9 +15,4 @@ class VoteSerializer(serializers.ModelSerializer):
 class FavoriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Favorite
-        fields = '__all__'
-
-class WatchlistSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Watchlist
         fields = '__all__'

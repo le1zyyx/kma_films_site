@@ -10,4 +10,3 @@ urlpatterns = [
     path('favorites/', views.FavoriteListView.as_view(), name='favorites'),
     path('favorites/<int:pk>/', views.FavoriteDetailView.as_view(), name='favorite_detail'),
 ]
-

@@ -1,11 +1,21 @@
+import logging
+from django.views.decorators.csrf import ensure_csrf_cookie
+from rest_framework.decorators import permission_classes, api_view
+from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Movie, Vote, Favorite
-from .serializers import MovieSerializer, VoteSerializer, FavoriteSerializer
+from .serializers import MovieSerializer, VoteSerializer, FavoriteSerializer, UserRegistrationSerializer, UserSerializer
 from .permissions import IsAuthenticatedOrReadOnly, IsOwnerOrAdminOrReadOnly
+
+@ensure_csrf_cookie
+def get_csrf_token(request):
+    return JsonResponse({'detail': 'CSRF cookie set'})
+
 
 def home(request):
     return HttpResponse("OK")
@@ -19,9 +29,9 @@ class MovieListView(APIView):
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = MovieSerializer(data=request.data)
+        serializer = MovieSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
-            serializer.save(creator=request.user)
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -136,3 +146,25 @@ class FavoriteDetailView(APIView):
         self.check_object_permissions(request, favorite)
         favorite.delete()
         return Response({'message': 'Favorite deleted'}, status=status.HTTP_204_NO_CONTENT)
+
+logger = logging.getLogger(__name__)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def register_user(request):
+    serializer = UserRegistrationSerializer(data=request.data)
+    if serializer.is_valid():
+        user = serializer.save()
+        logger.info(f"New user registered: {user.username}")
+        refresh = RefreshToken.for_user(user)
+        user_serializer = UserSerializer(user)
+        return Response({
+            'message': 'Користувач успішно зареєстрований і залогінений',
+            'user': user_serializer.data,
+            'tokens': {
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            }
+        }, status=status.HTTP_201_CREATED)
+    logger.warning(f"Registration failed: {serializer.errors}")
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

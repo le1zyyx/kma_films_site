@@ -22,7 +22,6 @@ class Vote(models.Model):
 
     class Meta:
         unique_together = ('user','movie')
-
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)

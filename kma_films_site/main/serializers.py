@@ -51,11 +51,13 @@ class MovieSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class VoteSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model = Vote
         fields = '__all__'
 
 class FavoriteSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model = Favorite
         fields = '__all__'

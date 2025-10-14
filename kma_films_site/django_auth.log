@@ -1,0 +1,8 @@
+WARNING 2025-10-14 10:57:32,922 views 2176 6213857280 Registration failed: {'password_check': [ErrorDetail(string="Це поле обов'язкове.", code='required')]}
+INFO 2025-10-14 10:57:56,299 views 2176 6213857280 New user registered: testuser1
+WARNING 2025-10-14 10:58:46,279 views 2176 6213857280 Registration failed: {'username': [ErrorDetail(string="Користувач з таким ім'ям вже існує.", code='unique')]}
+WARNING 2025-10-14 10:58:53,704 views 2176 6213857280 Registration failed: {'password_check': [ErrorDetail(string='Паролі не співпадають.', code='invalid')]}
+WARNING 2025-10-14 10:58:59,647 views 2176 6213857280 Registration failed: {'password_check': [ErrorDetail(string='Паролі не співпадають.', code='invalid')]}
+WARNING 2025-10-14 10:59:00,231 views 2176 6213857280 Registration failed: {'password_check': [ErrorDetail(string='Паролі не співпадають.', code='invalid')]}
+WARNING 2025-10-14 10:59:28,029 views 2176 6213857280 Registration failed: {'email': [ErrorDetail(string='Введіть коректну адресу електронної пошти.', code='invalid')]}
+WARNING 2025-10-14 10:59:30,729 views 2176 6213857280 Registration failed: {'email': [ErrorDetail(string='Введіть коректну адресу електронної пошти.', code='invalid')]}

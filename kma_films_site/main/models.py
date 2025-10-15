@@ -10,7 +10,6 @@ class Movie(models.Model):
     country = models.CharField(max_length=50, blank=True)
     genre = models.CharField(max_length=50, blank=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="created_movies")
-    user = models.ForeignKey(User, verbose_name='User', on_delete=models.CASCADE, related_name="user_movies")
     created_at = models.DateTimeField(auto_now_add=True)
 
 class Vote(models.Model):
@@ -23,16 +22,7 @@ class Vote(models.Model):
 
     class Meta:
         unique_together = ('user','movie')
-
 class Favorite(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    added_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        unique_together = ('user','movie')
-
-class Watchlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     added_at = models.DateTimeField(auto_now_add=True)

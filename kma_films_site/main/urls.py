@@ -1,4 +1,6 @@
 from django.urls import path
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+
 from . import views
 
 urlpatterns = [
@@ -9,5 +11,10 @@ urlpatterns = [
     path('votes/<int:pk>/', views.VoteDetailView.as_view(), name='vote_detail'),
     path('favorites/', views.FavoriteListView.as_view(), name='favorites'),
     path('favorites/<int:pk>/', views.FavoriteDetailView.as_view(), name='favorite_detail'),
+    path('csrf/', views.get_csrf_token, name='csrf'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/verify/', TokenVerifyView.as_view(), name='verify'),
+    path('auth/register/', views.register_user, name='register'),
+    path('profile/', views.user_profile, name='user_profile'),
 ]
-

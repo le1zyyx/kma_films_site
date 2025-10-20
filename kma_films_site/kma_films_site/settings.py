@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main.apps.MainConfig',
+    'kma_films_site.main.apps.MainConfig',
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',

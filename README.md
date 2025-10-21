@@ -146,4 +146,30 @@ text
 
 ---
 
+## ✅ Testing
+
+1. **Install requirements**
+    ```
+    pip install -r requirements.txt
+    ```
+
+2. **Apply migrations**
+    ```
+    python manage.py migrate
+    ```
+
+3. **Run all tests**
+    ```
+    pytest
+    ```
+
+4. **Test coverage report**
+    ```
+    pytest --cov=main --cov-report=term-missing
+    ```
+
+> **Coverage:**  
+> (423 - 115) ÷ 423 × 100 ≈ 72.86% → **73%**
+
+---
 Enjoy the movies and contribute!

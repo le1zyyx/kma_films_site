@@ -43,7 +43,7 @@ class MovieDetailView(APIView):
     def put(self, request, pk):
         movie = self.get_object(pk)
         self.check_object_permissions(request, movie)
-        serializer = MovieSerializer(movie, data=request.data)
+        serializer = MovieSerializer(movie, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -95,12 +95,10 @@ class VoteDetailView(APIView):
 
 class FavoriteListView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
-
     def get(self, request):
         favorites = Favorite.objects.filter(user=request.user)
         serializer = FavoriteSerializer(favorites, many=True)
         return Response(serializer.data)
-
     def post(self, request):
         serializer = FavoriteSerializer(data=request.data)
         if serializer.is_valid():
@@ -138,7 +136,6 @@ def register_user(request):
     serializer = UserRegistrationSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.save()
-        logger.info(f"New user registered: {user.username}")
         refresh = RefreshToken.for_user(user)
         user_serializer = UserSerializer(user)
         return Response({
@@ -149,7 +146,6 @@ def register_user(request):
                 'access': str(refresh.access_token),
             }
         }, status=status.HTTP_201_CREATED)
-    logger.warning(f"Registration failed: {serializer.errors}")
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])

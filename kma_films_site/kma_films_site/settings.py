@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main.apps.MainConfig',
+    'main',
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
@@ -75,7 +75,7 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
 ]
 
-ROOT_URLCONF = 'kma_films_site.urls'
+ROOT_URLCONF = 'kma_films_site.kma_films_site.urls'
 
 TEMPLATES = [
     {
@@ -92,7 +92,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'kma_films_site.wsgi.application'
+WSGI_APPLICATION = 'kma_films_site.kma_films_site.wsgi.application'
 
 
 # Database
